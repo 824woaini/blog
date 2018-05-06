@@ -5,10 +5,10 @@ hugo
 # =========================
 # GZIP All Html, css and js
 # =========================
-find public/ -iname '*.html' -exec gzip -n {} +
-find public/ -iname '*.js' -exec gzip -n {} +
-find public/ -iname '*.css' -exec gzip -n {} +
-find public/ -iname '*.gz' -exec rename 's/\.gz$//i' {} +
+find public -iname '*.html' -exec gzip -nf {} +
+find public -iname '*.js' -exec gzip -nf {} +
+find public -iname '*.css' -exec gzip -nf {} +
+find public -iname '*.gz' -exec rename 's/\.gz$//i' {} +
 echo done.
 
 # =========================
@@ -19,6 +19,16 @@ echo '
 # 404 settings
 # =========================
 ErrorDocument 404 /404.html
+
+# =========================
+# HTTPS settings
+# =========================
+SetEnvIf REDIRECT_HTTPS (.*) HTTPS=$1
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{ENV:HTTPS} !on
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
 
 # =========================
 # Set Gzip for Sakura Server
