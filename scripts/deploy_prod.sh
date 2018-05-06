@@ -5,10 +5,10 @@ hugo
 # =========================
 # GZIP All Html, css and js
 # =========================
-find _site/ -iname '*.html' -exec gzip -n {} +
-find _site/ -iname '*.js' -exec gzip -n {} +
-find _site/ -iname '*.css' -exec gzip -n {} +
-find _site/ -iname '*.gz' -exec rename 's/\.gz$//i' {} +
+find public/ -iname '*.html' -exec gzip -n {} +
+find public/ -iname '*.js' -exec gzip -n {} +
+find public/ -iname '*.css' -exec gzip -n {} +
+find public/ -iname '*.gz' -exec rename 's/\.gz$//i' {} +
 echo done.
 
 # =========================
